@@ -1,6 +1,7 @@
 package ca.qaguru.oranghrmbatch29.pages;
 
 public class MenuOptions {
+
     public static final String CANDIDATES = "Recruitment|Candidates";
     public static final String VACANCIES = "Recruitment|Vacancies";
     public static final String USERS = "Admin|User Management|Users";

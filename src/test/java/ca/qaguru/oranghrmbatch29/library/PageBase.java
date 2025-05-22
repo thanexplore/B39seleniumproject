@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public abstract class PageBase {
     protected WebDriver driver;
-    private final long WAIT_TIME = 5L;
+    private final long WAIT_TIME = 10L;
     private static final int DEF_MAX_TRIALS = 10;
     private static final int REATTEMPT_DELAY = 500;
     protected static final int MENU_SELECTION_DELAY = 1000;
