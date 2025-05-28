@@ -41,7 +41,7 @@ public class LanguagePage extends PageBase {
         PageFactory.initElements(driver, this);
     }
 
-    public void checkAndUncheck() {
+    public boolean checkAndUncheck() {
 
         click(By.xpath(adminPageRouter));
 
@@ -52,17 +52,21 @@ public class LanguagePage extends PageBase {
         click(By.xpath(checkALL));
         mouseHover(By.xpath(deleteSelectedBtn));
 
-        Assert.assertTrue(isElementPresent(By.xpath("//button[@class='oxd-button oxd-button--medium oxd-button--label-danger orangehrm-horizontal-margin']")), "Assertion fail for delete button styling");
+       Assert.assertTrue(isElementPresent(By.xpath("//button[@class='oxd-button oxd-button--medium oxd-button--label-danger orangehrm-horizontal-margin']")), "Assertion fail for delete button styling");
 
 
-        click(By.xpath(unCheckALl));
-
-        System.out.println("Testing Checkbox checking and unchecking with mousehovering over the delete button ");
 
 
+       click(By.xpath(unCheckALl));
+
+
+
+       System.out.println("Testing Checkbox checking and unchecking with mousehovering over the delete button ");
+       boolean elementVisibleOrNot = isElementVisible(By.xpath(deleteSelectedBtn));
+       return elementVisibleOrNot;
     }
 
-    public void addNewLanguage(String newLanguage) {
+    public boolean addNewLanguage(String newLanguage) {
 
         click(By.xpath(adminPageRouter));
         click(By.xpath(qualificationNav));
@@ -83,14 +87,14 @@ public class LanguagePage extends PageBase {
             System.out.println(txtLanguage);
         }
         Boolean match = listLanguage.stream().map(s -> s.getText()).anyMatch(s -> s.equalsIgnoreCase(newLanguage));
-        Assert.assertTrue(match);
+        //Assert.assertTrue(match);
         System.out.println("\n");
         System.out.println(newLanguage + " is added successfully");
         System.out.println("\n");
-
+       return match;
     }
 
-    public void scrollDownALanguage(String dataToScroll) {
+    public String scrollDownALanguage(String dataToScroll) {
         int counter = 0;
         int locator = 0;
         click(By.xpath(adminPageRouter));
@@ -116,12 +120,12 @@ public class LanguagePage extends PageBase {
 
         mouseHover(By.xpath(languages + "[" + strLocator + "]"));
 
-        Assert.assertEquals(scrolldata, dataToScroll, "not matching");
+        //Assert.assertEquals(scrolldata, dataToScroll, "not matching");
 
-
+       return scrolldata;
     }
 
-    public void editALanguage(String dataToEdit) {
+    public boolean editALanguage(String dataToEdit) {
         int counter = 0;
         int locator = 0;
         click(By.xpath(adminPageRouter));
@@ -156,13 +160,14 @@ public class LanguagePage extends PageBase {
             System.out.println(txtLanguage);
         }
         Boolean match = listLanguage.stream().map(s -> s.getText()).anyMatch(s -> s.equalsIgnoreCase(dataToEdit));
-        Assert.assertTrue(match);
+
         System.out.println("\n");
         System.out.println(dataToEdit + " is edited successfully");
         System.out.println("\n");
+        return match;
     }
 
-    public void deleteALanguage(String dataToDelete) {
+    public boolean deleteALanguage(String dataToDelete) {
         int counter = 0;
         int locator = 0;
         click(By.xpath(adminPageRouter));
@@ -195,10 +200,11 @@ public class LanguagePage extends PageBase {
             System.out.println(txtLanguage);
         }
         Boolean match = listLanguage.stream().map(s -> s.getText()).anyMatch(s -> s.equalsIgnoreCase(dataToDelete));
-        Assert.assertFalse(match, "not deleted");
+
         System.out.println("\n");
         System.out.println(dataToDelete + " is deleted successfully");
         System.out.println("\n");
+        return match;
 
     }
 
