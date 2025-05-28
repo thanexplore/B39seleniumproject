@@ -344,4 +344,9 @@ public abstract class PageBase {
         }
         return null;
     }
+    protected void findElement( By by , String sendKey){
+        isElementVisible(by);
+        driver.findElement(by).sendKeys(sendKey);
+
+    }
 }
